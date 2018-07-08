@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <title>Weatherman Barometer</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="dashboard.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Winnipeg Weatherman</a>
+  </nav>
+
+  <form id="dataSelection" method="POST" action="/detectOutliers">
+    <div class="form-group">
+      <label for="metricType">metricType</label>
+      <select name="metric_type" class="form-control" id="metricType">
+        <option>xre.ERROR_OVERLAYS_METRIC</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <label for="filterField">filterField</label>
+        <select name="metric_type" class="form-control" id="filterField">
+            <option>eventType</option>
+          </select>
+      </div>
+
+    <div class="form-group">
+      <label for="filterValue">filterValue</label>
+      <input name= "filter_value" type="text" class="form-control" id="filterValue" placeholder="Regex expression or keyword. Example: XRE-070*, XRE-03007">
+    </div>
+
+    <div class="form-group">
+        <label for="statisticField">statisticField</label>
+        <select name="norm_function_params" class="form-control" id="statisticField">
+          <option>statisticCount</option>
+          <option>statisticNumerator</option>
+          <option>statisticDenominator</option>
+        </select>
+      </div>
+
+    <div class="form-group">
+      <label for="lookbackDays">lookbackDays</label>
+      <input name= "training_window_days" type="number" class="form-control" min=7 max=31 id="lookbackDays" placeholder="31">
+    </div>
+
+    <div class="form-group">
+      <label for="outlierThreshold">outlierThreshold</label>
+      <input name= "outlierThreshold" type="number" class="form-control" min=0 max=1 step=0.0000001 id="outlierThreshold", placeholder=0.1>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-1" id="selectData">Select Data</button>
+  </form>
+
+  <div id="historicalDataPreprocessed" style="width:1200px;height:500px;"></div>
+  <script src="historicalData.withOutliers.js"></script>
+
+  <div id="trainingData" style="width:1200px;height:500px;"></div>
+  <script src="trainingData.js"></script>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script> -->
+
+</body>
+
+</html>
